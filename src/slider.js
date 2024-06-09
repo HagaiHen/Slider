@@ -13,7 +13,16 @@ const Slider = () => {
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoScroll, setIsAutoScroll] = useState(false);
-  const { nextSlide, prevSlide} = useSlide(slides.length, setCurrentSlide);
+  
+  const { nextSlide, prevSlide, startAutoScroll, stopAutoScroll } = useSlide(slides.length, setCurrentSlide);
+
+  useEffect(() => {
+    if (isAutoScroll) {
+      startAutoScroll();
+    } else {
+      stopAutoScroll();
+    }
+  }, [isAutoScroll]);
 
   return (
     <div className="slider">
